@@ -101,7 +101,7 @@ class YOLO26OBB:
             grid = np.stack(np.indices((grid_h, grid_w))[::-1], axis=-1)
             self.grids[s] = grid.reshape(-1, 2).astype(np.float32) + 0.5
         
-        # Mapping for output indices (Box, Cls, Angle)
+        # Mapping for output indices (Cls, Box, Angle)
         # Note: This is model-specific hardcoding based on original script
         self.map_idx = {8: (0, 1, 2), 16: (3, 4, 5), 32: (6, 7, 8)}
 
@@ -174,7 +174,7 @@ class YOLO26OBB:
             if stride not in self.map_idx:
                 continue
             
-            bi, ci, ai = self.map_idx[stride]
+            ci, bi, ai = self.map_idx[stride]
             
             # Check bounds
             if max(bi, ci, ai) >= len(outputs):

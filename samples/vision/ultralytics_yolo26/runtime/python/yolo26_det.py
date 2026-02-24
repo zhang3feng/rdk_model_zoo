@@ -175,14 +175,14 @@ class YOLO26Detect:
         t0 = time.time()
         
         # Check output shape assumption
-        if outputs[0].buffer.shape[-1] != 4:
-            logger.warning("⚠️ Model output shape mismatch! Expected last dim to be 4 (bbox).")
+        if outputs[1].buffer.shape[-1] != 4:
+            logger.warning("⚠️ Model output shape mismatch! Expected index 1, 3, 5 to be 4 (bbox).")
 
         dets = []
-        # Group outputs: Box [0, 2, 4], Cls [1, 3, 5] corresponding to strides 8, 16, 32
+        # Group outputs: Cls [0, 2, 4], Box [1, 3, 5] corresponding to strides 8, 16, 32
         # Note: This assumes specific output order from the model export.
-        bboxes = [outputs[i].buffer.reshape(-1, 4) for i in [0, 2, 4]]
-        clses = [outputs[i].buffer.reshape(-1, self.cfg.classes_num) for i in [1, 3, 5]]
+        clses = [outputs[i].buffer.reshape(-1, self.cfg.classes_num) for i in [0, 2, 4]]
+        bboxes = [outputs[i].buffer.reshape(-1, 4) for i in [1, 3, 5]]
 
         for box_data, cls_data, stride in zip(bboxes, clses, self.cfg.strides):
             max_scores = np.max(cls_data, axis=1)
