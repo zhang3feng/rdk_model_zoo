@@ -7,7 +7,7 @@
 mkdir -p .
 
 # Base URL
-BASE_URL="https://archive.d-robotics.cc/downloads/rdk_model_zoo/rdk_x5/yolo26"
+BASE_URL="https://archive.d-robotics.cc/downloads/rdk_model_zoo/rdk_x5/YOLO26_OE_1.2.8"
 
 # List of models to download (Only n series)
 MODELS=(
