@@ -3,7 +3,6 @@ import html
 import os
 from functools import lru_cache
 from typing import List, Tuple, Dict, Set, Optional, Any
-
 import ftfy
 import regex as re
 
